@@ -1,0 +1,25 @@
+﻿{
+  "environments": [
+    {
+      "DevDir": "E:\\Languages\\Examples\\OpenGL\\playground\\build",
+      "BuildDir": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}"
+    }
+  ],
+  "configurations": [
+    {
+      "name": "x64-Debug",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "inheritEnvironments": [
+        "msvc_x64_x64"
+      ],
+      "buildRoot": "E:\\Languages\\Examples\\OpenGL\\playground\\build",
+      // "buildRoot": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}",
+      "installRoot": "E:\\Languages\\Examples\\OpenGL\\playground\\build",
+      // "installRoot": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "-v",
+      "ctestCommandArgs": ""
+    }
+  ]
+}
