@@ -3,7 +3,7 @@
 #include <vector>
 
 // GL includes
-#include <glad/glad.h>
+#include <glad/glad.hpp>
 
 // SDL includes different on windows
 // the way i have it set up so i gotta

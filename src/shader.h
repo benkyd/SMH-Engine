@@ -1,7 +1,7 @@
 #ifndef SRC_SHADER_H_
 #define SRC_SHADER_H_
 
-#include <glad/glad.h>
+#include <glad/glad.hpp>
 #include <string>
 #include <logger.h>
 

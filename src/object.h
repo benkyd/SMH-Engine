@@ -5,7 +5,7 @@
 #include <vector>
 
 // GL includes
-#include <glad/glad.h>
+#include <glad/glad.hpp>
 
 #if _WIN32
 #include <SDL.h>
