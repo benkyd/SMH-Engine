@@ -13,8 +13,8 @@ uniform sampler2D shadowMap;
 
 vec3 viewPos = vec3(0.0, 0.0, 0.0);
 vec3 objectColour = vec3(1.0, 1.0, 1.0);
-vec3 lightColour = vec3(1.0, 1.0, 1.0);
-// vec3 lightColour = vec3(0.1, 0.45, 0.9);
+vec3 lightColour = vec3(0.65, 0.65, 0.65);
+// vec3 lightColour = vec3(0.3, 0.85, 1.0);
 
 float calculateShadow(vec4 fragPosLightSpace) {
     vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
@@ -34,7 +34,7 @@ void main() {
     vec3 diffuse = diff * lightColour;
 
 
-    float specularStrength = 0.2;
+    float specularStrength = 0.1;
 
     vec3 viewDir = normalize(viewPos - FragPos);
     vec3 reflectDir = reflect(-lightDir, normal);
