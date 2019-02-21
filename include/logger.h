@@ -61,13 +61,18 @@ typedef enum {
 } ConsoleColour;
 #endif
 
-
 class Colour {
 public:
 	static void resetColour();
 
-	template<class T>
-	static void consoleColour(T colour);
+	template<typename T>
+	static void consoleColour(T colour) {
+	#ifdef _WIN32
+		SetConsoleTextAttribute(h, colour);
+	#else
+		std::cout << "\033[" << colour << "m";
+	#endif
+	}
 };
 
 typedef enum {
@@ -85,7 +90,6 @@ typedef enum {
 
 class Logger {
 public:
-
 	std::stringstream outStream;
 	std::map<LogType, std::string> lookupTable;
 	Logger();
@@ -122,7 +126,6 @@ public:
 #ifdef LOGGER_DEFINITION
 #undef LOGGER_DEFINITION
 
-
 void Colour::resetColour() {
 #ifdef _WIN32
 	SetConsoleTextAttribute(h, CONSOLE_COLOUR_BG_DEFAULT);
@@ -131,15 +134,6 @@ void Colour::resetColour() {
 	std::cout
 		<< "\033[" << CONSOLE_COLOUR_BG_DEFAULT << "m"
 		<< "\033[" << CONSOLE_COLOUR_FG_DEFAULT << "m";
-#endif
-}
-
-template<typename T>
-void Colour::consoleColour(T colour) {
-#ifdef _WIN32
-	SetConsoleTextAttribute(h, colour);
-#else
-	std::cout << "\033[" << colour << "m";
 #endif
 }
 

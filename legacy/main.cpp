@@ -19,7 +19,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 // Custom includes
-#define LOGGER_DEFINITION
+// #define LOGGER_DEFINITION
 #include <logger.h>
 #include "timers.h"
 #include "object.h"

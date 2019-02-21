@@ -33,23 +33,27 @@ typedef enum {
 
 class Display {
 public:
-    Display(std::string name, int w, int h, Logger& logger, 
+    Display(std::string name, Logger& logger, int w, int h,
             SMH_VSYNC_DISPLAY_MODE vsyncMode = VSYNC_DEFAULT, 
             SMH_MXAA_MODE mxaaMode = MXAA_DEFAULT);
 
-    Display(std::string name, int w, int h, Logger& logger, 
+    Display(std::string name, Logger& logger, int w, int h,
             SMH_MXAA_MODE mxaaMode = MXAA_DEFAULT, 
             SMH_VSYNC_DISPLAY_MODE vsyncMode = VSYNC_DEFAULT);
 
     void setName(std::string name);
 
+    bool isClosed = true;
+
     SDL_Window* window;
     SDL_GLContext glContext;
 
     SMH_VSYNC_DISPLAY_MODE VSyncMode = VSYNC_DEFAULT;
-    SMH_MXAA_MODE MXAAMode = MXAA_DEFAULT; 
+    SMH_MXAA_MODE MXAAMode = MXAA_DEFAULT;
 
     virtual ~Display();
+private:
+    Logger& logger;
 };
 
 #endif

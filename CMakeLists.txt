@@ -45,7 +45,7 @@ include_directories(${executable}
     ${IncludeDIR}
 )
 
-file(GLOB_RECURSE SourceFiles 
+file(GLOB SourceFiles 
     ${SrcDIR}/*
 )
 
