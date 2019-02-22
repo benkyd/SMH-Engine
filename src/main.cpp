@@ -25,10 +25,14 @@ int main (int argc, char** argv) {
     Display display {"SMH Engine", logger, 1280, 720, MXAA_4X, VSYNC_ENABLED};
 
     SDL_Event e;
-    while (!display.isClosed)
+    while (!display.isClosed) {
         while (SDL_PollEvent(&e))
             if (e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
 				display.isClosed = true;
+
+
+        SDL_GL_SwapWindow(display.window);
+    }
 
     return 0;
 }
