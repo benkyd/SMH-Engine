@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include <OBJLoader.h>
+
 #include <glad/glad.hpp>
 
 #include <glm/glm.hpp>
@@ -16,8 +18,9 @@ class Mesh {
 public:
     Mesh();
     Mesh(std::string objPath);
+	Mesh(objl::Mesh objMesh);
 
-    void LoadFromObj(std::string objPath);
+	void loadFromObj(objl::Mesh objMesh);
     void settup();
 
     void bind();
@@ -31,7 +34,6 @@ public:
     std::vector<glm::vec2> texCoords;
     std::vector<glm::vec3> normals;
     std::vector<GLuint> indices;
-
 private:
     GLuint vertexBuffer;
     GLuint indexBuffer;
