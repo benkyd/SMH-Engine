@@ -12,6 +12,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "./util/util.h"
+
 class Shader;
 
 class Mesh {
@@ -30,7 +32,6 @@ public:
     GLuint VAOid;
 
     std::vector<glm::vec3> vertices;
-    std::vector<glm::vec4> colours;
     std::vector<glm::vec2> texCoords;
     std::vector<glm::vec3> normals;
     std::vector<GLuint> indices;
