@@ -1,7 +1,7 @@
 ﻿{
   "environments": [
     {
-      "DevDir": "E:\\Languages\\Examples\\OpenGL\\playground\\build",
+      "DevDir": "E:\\Projects\\SMH-Engine\\build",
       "BuildDir": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}"
     }
   ],
@@ -13,9 +13,9 @@
       "inheritEnvironments": [
         "msvc_x64_x64"
       ],
-      "buildRoot": "E:\\Languages\\Examples\\OpenGL\\playground\\build",
+      "buildRoot": "E:\\Projects\\SMH-Engine\\build",
       // "buildRoot": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}",
-      "installRoot": "E:\\Languages\\Examples\\OpenGL\\playground\\build",
+      "installRoot": "E:\\Projects\\SMH-Engine\\build",
       // "installRoot": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}",
       "cmakeCommandArgs": "",
       "buildCommandArgs": "-v",
