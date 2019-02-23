@@ -12,6 +12,7 @@
 
 #include <OBJLoader.h>
 
+#include <logger.h>
 #include "./util/util.h"
 
 class Shader;

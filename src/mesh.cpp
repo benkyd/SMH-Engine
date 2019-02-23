@@ -5,17 +5,26 @@ Mesh::Mesh() {
 }
 
 Mesh::Mesh(std::string objPath) {
+	Logger logger;
+	objl::Loader loader;
+	bool canLoad = loader.LoadFile(objPath);
 
+	if (!canLoad) {
+		logger << LOGGER_ERROR << "Cannot load obj '" << objPath << "'" << LOGGER_ENDL;
+		return;
+	}
+
+	OBJLtoGLM(loader.LoadedMeshes[0].Vertices, vertices, normals, texCoords);
 }
 
 Mesh::Mesh(objl::Mesh objMesh) {
     OBJLtoGLM(objMesh.Vertices, vertices, normals, texCoords);
-    // objMesh.Vertices includes normals, positions and texcoords
-    // it must convert them to the neccesary GLM shit
+	UintToGLuint(objMesh.Indices, indices);
 }
 
-void Mesh::loadFromObj(objl::Mesh objmesh) {
-
+void Mesh::loadFromObj(objl::Mesh objMesh) {
+	OBJLtoGLM(objMesh.Vertices, vertices, normals, texCoords);
+	UintToGLuint(objMesh.Indices, indices);
 }
 
 void Mesh::settup() {
