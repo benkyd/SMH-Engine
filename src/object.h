@@ -1,5 +1,5 @@
-#ifndef SMHENGINE_SRC_MODEL_H_
-#define SMHENGINE_SRC_MODEL_H_
+#ifndef SMHENGINE_SRC_OBJECT_H_
+#define SMHENGINE_SRC_OBJECT_H_
 
 #include <string>
 #include <vector>
@@ -14,15 +14,15 @@
 
 #include <logger.h>
 
-#include "mesh.h"
-#include "material.h"
+#include "model.h"
+#include "shader.h"
 
-class Model {
+class Object {
 public:
-	Model();
-	Model(std::string loadPath);
+	Object();
 
-	std::vector<std::pair<Mesh, Material>> modelData;
+	std::vector<Model> models;
+	std::vector<Shader> shaders;
 };
 
 #endif

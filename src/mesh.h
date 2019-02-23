@@ -24,17 +24,19 @@ public:
 	Mesh(objl::Mesh objMesh);
 
 	void loadFromObj(objl::Mesh objMesh);
-    void settup();
+    void setup();
 
     void bind();
     void render(Shader& shader);
-    void unbind();
+    static void unbind();
 
     GLuint VAOid;
 
     std::vector<glm::vec3> vertices;
-    std::vector<glm::vec2> texCoords;
     std::vector<glm::vec3> normals;
+	// This is a vec3 so it can all pop into
+	//one buffer :)
+    std::vector<glm::vec3> texCoords;
     std::vector<GLuint> indices;
 private:
     GLuint vertexBuffer;

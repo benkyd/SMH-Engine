@@ -12,6 +12,7 @@
 #include <logger.h>
 
 #include "display.h"
+#include "model.h"
 
 int main (int argc, char** argv) {
 
