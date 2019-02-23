@@ -46,7 +46,8 @@ include_directories(${executable}
 )
 
 file(GLOB SourceFiles 
-    ${SrcDIR}/*
+	${SrcDIR}/*
+	${SrcDIR}/util/*	
 )
 
 add_executable(${executable} ${SourceFiles})

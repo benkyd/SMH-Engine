@@ -9,7 +9,7 @@ Mesh::Mesh(std::string objPath) {
 }
 
 Mesh::Mesh(objl::Mesh objMesh) {
-    OBJLtoGLM(objMesh.Vertices, vertices);
+    OBJLtoGLM(objMesh.Vertices, vertices, normals, texCoords);
     // objMesh.Vertices includes normals, positions and texcoords
     // it must convert them to the neccesary GLM shit
 }
