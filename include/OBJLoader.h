@@ -631,31 +631,17 @@ namespace objl
 			return "";
 		}
 
-		// Get element at given index position
-		template <class T>
-		inline const T & getElement(const std::vector<T> &elements, std::string &index)
-		{
-			int idx = std::stoi(index);
-			if (idx < 0)
-				idx = int(elements.size()) + idx;
-			else
-				idx--;
-			return elements[idx];
-		}
 	}
 
 	// Class: Loader
 	//
 	// Description: The OBJ Model Loader
-	class Loader
-	{
-	public:
 		// Default Constructor
-		Loader()
+		objl::Loader::Loader()
 		{
 
 		}
-		~Loader()
+		objl::Loader::~Loader()
 		{
 			LoadedMeshes.clear();
 		}
@@ -666,7 +652,7 @@ namespace objl
 		//
 		// If the file is unable to be found
 		// or unable to be loaded return false
-		bool LoadFile(std::string Path)
+		bool objl::Loader::LoadFile(std::string Path)
 		{
 			// If the file is not an .obj file return false
 			if (Path.substr(Path.size() - 4, 4) != ".obj")
@@ -950,19 +936,9 @@ namespace objl
 			}
 		}
 
-		// Loaded Mesh Objects
-		std::vector<Mesh> LoadedMeshes;
-		// Loaded Vertex Objects
-		std::vector<Vertex> LoadedVertices;
-		// Loaded Index Positions
-		std::vector<unsigned int> LoadedIndices;
-		// Loaded Material Objects
-		std::vector<Material> LoadedMaterials;
-
-	private:
 		// Generate vertices from a list of positions, 
 		//	tcoords, normals and a face line
-		void GenVerticesFromRawOBJ(std::vector<Vertex>& oVerts,
+		void Loader::GenVerticesFromRawOBJ(std::vector<Vertex>& oVerts,
 			const std::vector<Vector3>& iPositions,
 			const std::vector<Vector2>& iTCoords,
 			const std::vector<Vector3>& iNormals,
@@ -1073,7 +1049,7 @@ namespace objl
 
 		// Triangulate a list of vertices into a face by printing
 		//	inducies corresponding with triangles within it
-		void VertexTriangluation(std::vector<unsigned int>& oIndices,
+		void Loader::VertexTriangluation(std::vector<unsigned int>& oIndices,
 			const std::vector<Vertex>& iVerts)
 		{
 			// If there are 2 or less verts,
@@ -1241,7 +1217,7 @@ namespace objl
 		}
 
 		// Load Materials from .mtl file
-		bool LoadMaterials(std::string path)
+		bool Loader::LoadMaterials(std::string path)
 		{
 			// If the file is not a material file return false
 			if (path.substr(path.size() - 4, path.size()) != ".mtl")
@@ -1401,7 +1377,6 @@ namespace objl
 			else
 				return true;
 		}
-	};
 }
 
 #endif
