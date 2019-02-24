@@ -11,6 +11,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include <OBJLoader.h>
+#include <object.h>
 
 #include <logger.h>
 #include "shader.h"
@@ -37,7 +38,7 @@ public:
 	// This is a vec3 so it can all pop into
 	//one buffer :)
     std::vector<glm::vec3> texCoords;
-    std::vector<GLuint> indices;
+    std::vector<GLushort> indices;
 private:
     GLuint vertexBuffer;
     GLuint indexBuffer;
