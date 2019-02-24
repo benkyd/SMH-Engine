@@ -11,11 +11,18 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include <OBJLoader.h>
-#include <object.h>
+// #include <objectLoader.h>
 
 #include <logger.h>
 #include "shader.h"
 #include "./util/util.h"
+
+// Not in use yet
+struct Vertex {
+	glm::vec3 vertice;
+	glm::vec3 normal;
+	glm::vec2 texCoord;
+};
 
 class Mesh {
 public:
@@ -38,7 +45,7 @@ public:
 	// This is a vec3 so it can all pop into
 	//one buffer :)
     std::vector<glm::vec3> texCoords;
-    std::vector<GLushort> indices;
+    std::vector<unsigned int> indices;
 private:
     GLuint vertexBuffer;
     GLuint indexBuffer;

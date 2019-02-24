@@ -12,7 +12,7 @@ void OBJLtoGLM(std::vector<objl::Vertex>& inVertArr,
                std::vector<glm::vec3>& outTexCoord);
 
 void UintToGLuint(std::vector<unsigned int>& inIndices,
-                  std::vector<GLushort>& outIndices);
+                  std::vector<GLuint>& outIndices);
 
 void OBJLVec3toGLM(objl::Vector3& inVec, glm::vec3& outVec);
 

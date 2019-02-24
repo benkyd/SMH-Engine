@@ -6,19 +6,17 @@ Mesh::Mesh() {
 
 Mesh::Mesh(std::string objPath) {
 	Logger logger;
-	//objl::Loader loader;
-	//bool canLoad = loader.LoadFile(objPath);
+	objl::Loader loader;
+	bool canLoad = loader.LoadFile(objPath);
 
-	//if (!canLoad) {
-	//	logger << LOGGER_ERROR << "Cannot load obj '" << objPath << "'" << LOGGER_ENDL;
-	//	return;
-	//}
-
-	LoadOBJ(logger, objPath, vertices, normals, indices);
+	if (!canLoad) {
+		logger << LOGGER_ERROR << "Cannot load obj '" << objPath << "'" << LOGGER_ENDL;
+		return;
+	}
 
 	logger << LOGGER_INFO << "Loaded: " << objPath << LOGGER_ENDL;
 
-	//loadFromObj(loader.LoadedMeshes[0]);
+	loadFromObj(loader.LoadedMeshes[0]);
 }
 
 Mesh::Mesh(objl::Mesh objMesh) {
@@ -27,7 +25,7 @@ Mesh::Mesh(objl::Mesh objMesh) {
 
 void Mesh::loadFromObj(objl::Mesh objMesh) {
 	OBJLtoGLM(objMesh.Vertices, vertices, normals, texCoords);
-	UintToGLuint(objMesh.Indices, indices);
+	indices = objMesh.Indices;
 	name = objMesh.MeshName;
 
 	//Logger logger;
@@ -50,13 +48,13 @@ void Mesh::setup() {
 	std::vector<glm::vec3> toGpu;
 	toGpu.insert(toGpu.end(), vertices.begin(), vertices.end());
 	toGpu.insert(toGpu.end(), normals.begin(), normals.end());
-	//toGpu.insert(toGpu.end(), texCoords.begin(), texCoords.end());
+	toGpu.insert(toGpu.end(), texCoords.begin(), texCoords.end());
 
 	glBufferData(GL_ARRAY_BUFFER, toGpu.size() * sizeof(glm::vec3), 
 				 &toGpu[0], GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLushort),
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint),
 				 &indices[0], GL_STATIC_DRAW);
 
 	// Positions
@@ -70,9 +68,9 @@ void Mesh::setup() {
 						 (const void*)(vertices.size() * sizeof(glm::vec3)));
 
 	// TexCoords
-	//glEnableVertexAttribArray(2);
-	//glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, 
-	//					 (const void*)((vertices.size() + texCoords.size()) * sizeof(glm::vec3)));
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, 
+						 (const void*)((vertices.size() + texCoords.size()) * sizeof(glm::vec3)));
 
 	logger << LOGGER_INFO << "Mesh " << name << " setup" << LOGGER_ENDL;
 

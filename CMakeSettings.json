@@ -20,6 +20,21 @@
       "cmakeCommandArgs": "",
       "buildCommandArgs": "-v",
       "ctestCommandArgs": ""
+    },
+    {
+      "name": "x64-Build",
+      "generator": "Ninja",
+      "configurationType": "Release",
+      "inheritEnvironments": [
+        "msvc_x64_x64"
+      ],
+      "buildRoot": "E:\\Projects\\SMH-Engine\\build",
+      // "buildRoot": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}",
+      "installRoot": "E:\\Projects\\SMH-Engine\\build",
+      // "installRoot": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "-v",
+      "ctestCommandArgs": ""
     }
   ]
 }

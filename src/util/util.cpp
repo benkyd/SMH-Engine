@@ -23,7 +23,7 @@ void OBJLtoGLM(std::vector<objl::Vertex>& inVertArr,
 }
 
 void UintToGLuint(std::vector<unsigned int>& inIndices,
-                  std::vector<GLushort>& outIndices) {
+                  std::vector<GLuint>& outIndices) {
 
     for (int i = 0; i < inIndices.size(); i++) {
         outIndices.push_back(inIndices[i]);
