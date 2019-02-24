@@ -1,13 +1,15 @@
 #include "util.h"
 
+#include <logger.h>
+
 void OBJLtoGLM(std::vector<objl::Vertex>& inVertArr, 
                std::vector<glm::vec3>& outVert,
                std::vector<glm::vec3>& outNorm,
                std::vector<glm::vec3>& outTexCoord) {
 
-    for (int i = 0; i < inVertArr.size(); i++) {
-
-        glm::vec3 tempVert {inVertArr[i].Position.X, inVertArr[i].Position.Y, inVertArr[i].Position.Z};
+    for (int i = 0; i < inVertArr.size() - 1; i++) {
+        
+		glm::vec3 tempVert {inVertArr[i].Position.X, inVertArr[i].Position.Y, inVertArr[i].Position.Z};
         outVert.push_back(tempVert);
 
         glm::vec3 tempNorm {inVertArr[i].Normal.X, inVertArr[i].Normal.Y, inVertArr[i].Normal.Z};

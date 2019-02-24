@@ -23,12 +23,13 @@ typedef enum {
 } SMH_VSYNC_DISPLAY_MODE;
 
 typedef enum {
-    MXAA_DEFAULT,
-    MXAA_DISABLED,
-    MXAA_ENABLED,
-    MXAA_2X,
-    MXAA_4X,
-    MXAA_8X
+	MXAA_DEFAULT,
+	MXAA_DISABLED,
+	MXAA_ENABLED,
+	MXAA_2X,
+	MXAA_4X,
+	MXAA_8X,
+	MXAA_16X
 } SMH_MXAA_MODE;
 
 class Display {
@@ -42,6 +43,7 @@ public:
             SMH_VSYNC_DISPLAY_MODE vsyncMode = VSYNC_DEFAULT);
 
     void setName(std::string name);
+	void update();
 
     bool isClosed = true;
 

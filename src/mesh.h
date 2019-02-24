@@ -13,9 +13,8 @@
 #include <OBJLoader.h>
 
 #include <logger.h>
+#include "shader.h"
 #include "./util/util.h"
-
-class Shader;
 
 class Mesh {
 public:
@@ -32,6 +31,7 @@ public:
 
     GLuint VAOid;
 
+	std::string name;
     std::vector<glm::vec3> vertices;
     std::vector<glm::vec3> normals;
 	// This is a vec3 so it can all pop into

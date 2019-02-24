@@ -7,11 +7,12 @@
 // #include <glm/gtc/type_ptr.hpp>
 
 // Custom includes
-#define OBJL_DEFINITION
+#define OBJL_IMPLIMENTATION
 #define LOGGER_DEFINITION
 #include <logger.h>
 
 #include "display.h"
+#include "shader.h"
 #include "model.h"
 
 int main (int argc, char** argv) {
@@ -24,7 +25,13 @@ int main (int argc, char** argv) {
 
     Logger logger;
 
-    Display display {"SMH Engine", logger, 1280, 720, MXAA_4X, VSYNC_ENABLED};
+    Display display{"SMH Engine", logger, 1280, 720, MXAA_16X, VSYNC_ENABLED};
+
+	Shader shader;
+	shader.load("./resources/shaders/phong").attatch().link().use();
+
+	Mesh mesh{ "./resources/dragon.obj" };
+	mesh.setup();
 
     SDL_Event e;
     while (!display.isClosed) {
@@ -32,8 +39,11 @@ int main (int argc, char** argv) {
             if (e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
 				display.isClosed = true;
 
+		mesh.bind();
+		mesh.render(shader);
+		mesh.unbind();
 
-        SDL_GL_SwapWindow(display.window);
+		display.update();
     }
 
     return 0;

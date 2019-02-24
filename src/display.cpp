@@ -37,6 +37,10 @@ Display::Display(std::string name, Logger& logger, int w, int h,
                 mxaaLevel = 8;
                 smxaaLevel = "8";
                 break;
+			case MXAA_16X:
+				mxaaLevel = 16;
+				smxaaLevel = "16";
+				break;
             default:
                 mxaaLevel = 2;
                 smxaaLevel = "2";
@@ -78,6 +82,7 @@ Display::Display(std::string name, Logger& logger, int w, int h,
 
     // Load OpenGL
 	gladLoadGLLoader(SDL_GL_GetProcAddress);
+	glEnable(GL_MULTISAMPLE);
     logger << LOGGER_INFO << "Loaded OpenGL" << LOGGER_ENDL;
     logger << LOGGER_ENDL;
     isClosed = false;
@@ -124,6 +129,10 @@ Display::Display(std::string name, Logger& logger, int w, int h,
                 mxaaLevel = 8;
                 smxaaLevel = "8";
                 break;
+			case MXAA_16X:
+				mxaaLevel = 16;
+				smxaaLevel = "16";
+				break;
             default:
                 mxaaLevel = 2;
                 smxaaLevel = "2";
@@ -165,6 +174,7 @@ Display::Display(std::string name, Logger& logger, int w, int h,
 
     // Load OpenGL
 	gladLoadGLLoader(SDL_GL_GetProcAddress);
+	glEnable(GL_MULTISAMPLE);
     logger << LOGGER_INFO << "Loaded OpenGL" << LOGGER_ENDL;
     logger << LOGGER_ENDL;
     isClosed = false;
@@ -172,6 +182,14 @@ Display::Display(std::string name, Logger& logger, int w, int h,
 
 void Display::setName(std::string name) {
     SDL_SetWindowTitle(window, name.c_str());
+}
+
+void Display::update() {
+	SDL_GL_SwapWindow(window);
+
+	glClear(GL_DEPTH_BUFFER_BIT);
+	const float clear[] = { 0.1f, 0.45f, 0.9f, 1.0f };
+	glClearBufferfv(GL_COLOR, 0, clear);
 }
 
 Display::~Display() {
