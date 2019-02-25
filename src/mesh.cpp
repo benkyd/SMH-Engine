@@ -6,8 +6,8 @@ Mesh::Mesh() {
 
 Mesh::Mesh(std::string objPath) {
 	Logger logger;
-	objl::Loader loader;
-	bool canLoad = loader.LoadFile(objPath);
+	// objl::Loader loader;
+	// bool canLoad = loader.LoadFile(objPath);
 
 	if (!canLoad) {
 		logger << LOGGER_ERROR << "Cannot load obj '" << objPath << "'" << LOGGER_ENDL;
@@ -16,17 +16,17 @@ Mesh::Mesh(std::string objPath) {
 
 	logger << LOGGER_INFO << "Loaded: " << objPath << LOGGER_ENDL;
 
-	loadFromObj(loader.LoadedMeshes[0]);
+	// loadFromObj(loader.LoadedMeshes[0]);
 }
 
 Mesh::Mesh(objl::Mesh objMesh) {
-	loadFromObj(objMesh);
+	// loadFromObj(objMesh);
 }
 
 void Mesh::loadFromObj(objl::Mesh objMesh) {
-	OBJLtoGLM(objMesh.Vertices, vertices, normals, texCoords);
-	indices = objMesh.Indices;
-	name = objMesh.MeshName;
+	// OBJLtoGLM(objMesh.Vertices, vertices, normals, texCoords);
+	// indices = objMesh.Indices;
+	// name = objMesh.MeshName;
 
 	//Logger logger;
 	//for (int i = 0; i < 100; i++) {

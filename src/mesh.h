@@ -10,7 +10,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include <OBJLoader.h>
+#include <tiny_obj_loader.h>
 // #include <objectLoader.h>
 
 #include <logger.h>
