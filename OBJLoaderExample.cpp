@@ -1,101 +1,80 @@
-// Example 1: Load and Print
-//
-// Load the data from the .obj then print it into a file
-//	called e1Out.txt
+#define TINYOBJLOADER_IMPLEMENTATION // define this in only *one* .cc
+#include "tiny_obj_loader.h"
 
-// Iostream - STD I/O Library
-#include <iostream>
+std::string inputfile = "cornell_box.obj";
+tinyobj::attrib_t attrib;
+std::vector<tinyobj::shape_t> shapes;
+std::vector<tinyobj::material_t> materials;
 
-// fStream - STD File I/O Library
-#include <fstream>
-
-// OBJ_Loader - .obj Loader
-#include "OBJ_Loader.h"
-
-// Main function
-int main(int argc, char* argv[])
-{
-	// Initialize Loader
-	objl::Loader Loader;
-
-	// Load .obj File
-	bool loadout = Loader.LoadFile("box_stack.obj");
-
-	// Check to see if it loaded
-
-	// If so continue
-	if (loadout)
-	{
-		// Create/Open e1Out.txt
-		std::ofstream file("e1Out.txt");
-
-		// Go through each loaded mesh and out its contents
-		for (int i = 0; i < Loader.LoadedMeshes.size(); i++)
-		{
-			// Copy one of the loaded meshes to be our current mesh
-			objl::Mesh curMesh = Loader.LoadedMeshes[i];
-
-			// Print Mesh Name
-			file << "Mesh " << i << ": " << curMesh.MeshName << "\n";
-
-			// Print Vertices
-			file << "Vertices:\n";
-
-			// Go through each vertex and print its number,
-			//  position, normal, and texture coordinate
-			for (int j = 0; j < curMesh.Vertices.size(); j++)
-			{
-				file << "V" << j << ": " <<
-					"P(" << curMesh.Vertices[j].Position.X << ", " << curMesh.Vertices[j].Position.Y << ", " << curMesh.Vertices[j].Position.Z << ") " <<
-					"N(" << curMesh.Vertices[j].Normal.X << ", " << curMesh.Vertices[j].Normal.Y << ", " << curMesh.Vertices[j].Normal.Z << ") " <<
-					"TC(" << curMesh.Vertices[j].TextureCoordinate.X << ", " << curMesh.Vertices[j].TextureCoordinate.Y << ")\n";
-			}
-
-			// Print Indices
-			file << "Indices:\n";
-
-			// Go through every 3rd index and print the
-			//	triangle that these indices represent
-			for (int j = 0; j < curMesh.Indices.size(); j += 3)
-			{
-				file << "T" << j / 3 << ": " << curMesh.Indices[j] << ", " << curMesh.Indices[j + 1] << ", " << curMesh.Indices[j + 2] << "\n";
-			}
-
-			// Print Material
-			file << "Material: " << curMesh.MeshMaterial.name << "\n";
-			file << "Ambient Color: " << curMesh.MeshMaterial.Ka.X << ", " << curMesh.MeshMaterial.Ka.Y << ", " << curMesh.MeshMaterial.Ka.Z << "\n";
-			file << "Diffuse Color: " << curMesh.MeshMaterial.Kd.X << ", " << curMesh.MeshMaterial.Kd.Y << ", " << curMesh.MeshMaterial.Kd.Z << "\n";
-			file << "Specular Color: " << curMesh.MeshMaterial.Ks.X << ", " << curMesh.MeshMaterial.Ks.Y << ", " << curMesh.MeshMaterial.Ks.Z << "\n";
-			file << "Specular Exponent: " << curMesh.MeshMaterial.Ns << "\n";
-			file << "Optical Density: " << curMesh.MeshMaterial.Ni << "\n";
-			file << "Dissolve: " << curMesh.MeshMaterial.d << "\n";
-			file << "Illumination: " << curMesh.MeshMaterial.illum << "\n";
-			file << "Ambient Texture Map: " << curMesh.MeshMaterial.map_Ka << "\n";
-			file << "Diffuse Texture Map: " << curMesh.MeshMaterial.map_Kd << "\n";
-			file << "Specular Texture Map: " << curMesh.MeshMaterial.map_Ks << "\n";
-			file << "Alpha Texture Map: " << curMesh.MeshMaterial.map_d << "\n";
-			file << "Bump Map: " << curMesh.MeshMaterial.map_bump << "\n";
-
-			// Leave a space to separate from the next mesh
-			file << "\n";
-		}
-
-		// Close File
-		file.close();
-	}
-	// If not output an error
-	else
-	{
-		// Create/Open e1Out.txt
-		std::ofstream file("e1Out.txt");
-
-		// Output Error
-		file << "Failed to Load File. May have failed to find it or it was not an .obj file.\n";
-
-		// Close File
-		file.close();
-	}
-
-	// Exit the program
-	return 0;
+std::string warn;
+std::string err;
+bool ret = tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, inputfile.c_str());
+  
+if (!err.empty()) { // `err` may contain warning message.
+  std::cerr << err << std::endl;
 }
+
+if (!ret) {
+  exit(1);
+}
+
+// Loop over shapes
+for (size_t s = 0; s < shapes.size(); s++) {
+  // Loop over faces(polygon)
+  size_t index_offset = 0;
+  for (size_t f = 0; f < shapes[s].mesh.num_face_vertices.size(); f++) {
+    int fv = shapes[s].mesh.num_face_vertices[f];
+
+    // Loop over vertices in the face.
+    for (size_t v = 0; v < fv; v++) {
+      // access to vertex
+      tinyobj::index_t idx = shapes[s].mesh.indices[index_offset + v];
+      tinyobj::real_t vx = attrib.vertices[3*idx.vertex_index+0];
+      tinyobj::real_t vy = attrib.vertices[3*idx.vertex_index+1];
+      tinyobj::real_t vz = attrib.vertices[3*idx.vertex_index+2];
+      tinyobj::real_t nx = attrib.normals[3*idx.normal_index+0];
+      tinyobj::real_t ny = attrib.normals[3*idx.normal_index+1];
+      tinyobj::real_t nz = attrib.normals[3*idx.normal_index+2];
+      tinyobj::real_t tx = attrib.texcoords[2*idx.texcoord_index+0];
+      tinyobj::real_t ty = attrib.texcoords[2*idx.texcoord_index+1];
+      // Optional: vertex colors
+      // tinyobj::real_t red = attrib.colors[3*idx.vertex_index+0];
+      // tinyobj::real_t green = attrib.colors[3*idx.vertex_index+1];
+      // tinyobj::real_t blue = attrib.colors[3*idx.vertex_index+2];
+    }
+    index_offset += fv;
+
+    // per-face material
+    shapes[s].mesh.material_ids[f];
+  }
+}
+
+/**
+ * attrib_t::vertices => 3 floats per vertex
+
+       v[0]        v[1]        v[2]        v[3]               v[n-1]
+  +-----------+-----------+-----------+-----------+      +-----------+
+  | x | y | z | x | y | z | x | y | z | x | y | z | .... | x | y | z |
+  +-----------+-----------+-----------+-----------+      +-----------+
+
+attrib_t::normals => 3 floats per vertex
+
+       n[0]        n[1]        n[2]        n[3]               n[n-1]
+  +-----------+-----------+-----------+-----------+      +-----------+
+  | x | y | z | x | y | z | x | y | z | x | y | z | .... | x | y | z |
+  +-----------+-----------+-----------+-----------+      +-----------+
+
+attrib_t::texcoords => 2 floats per vertex
+
+       t[0]        t[1]        t[2]        t[3]               t[n-1]
+  +-----------+-----------+-----------+-----------+      +-----------+
+  |  u  |  v  |  u  |  v  |  u  |  v  |  u  |  v  | .... |  u  |  v  |
+  +-----------+-----------+-----------+-----------+      +-----------+
+
+attrib_t::colors => 3 floats per vertex(vertex color. optional)
+
+       c[0]        c[1]        c[2]        c[3]               c[n-1]
+  +-----------+-----------+-----------+-----------+      +-----------+
+  | x | y | z | x | y | z | x | y | z | x | y | z | .... | x | y | z |
+  +-----------+-----------+-----------+-----------+      +-----------+
+/*

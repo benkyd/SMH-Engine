@@ -4,7 +4,8 @@
 #include <glad/glad.hpp>
 #include <glm/glm.hpp>
 #include <vector>
-#include <OBJLoader.h>
+
+#include <tiny_obj_loader.h>
 
 void OBJLtoGLM(std::vector<objl::Vertex>& inVertArr, 
                std::vector<glm::vec3>& outVert,

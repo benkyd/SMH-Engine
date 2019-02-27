@@ -11,13 +11,15 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include <tiny_obj_loader.h>
-// #include <objectLoader.h>
 
 #include <logger.h>
 #include "shader.h"
 #include "./util/util.h"
 
 // Not in use yet
+// Will be used as a vector, enabling
+// the use of strides when sending the 
+// vertex data to the GPU
 struct Vertex {
 	glm::vec3 vertice;
 	glm::vec3 normal;
@@ -28,9 +30,9 @@ class Mesh {
 public:
     Mesh();
     Mesh(std::string objPath);
-	Mesh(objl::Mesh objMesh);
+	Mesh(tinyobj::attrib_t attribArr);
 
-	void loadFromObj(objl::Mesh objMesh);
+	void loadFromObj(tinyobj::attrib_t attribArr);
     void setup();
 
     void bind();

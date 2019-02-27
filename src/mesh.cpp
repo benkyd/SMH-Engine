@@ -6,24 +6,34 @@ Mesh::Mesh() {
 
 Mesh::Mesh(std::string objPath) {
 	Logger logger;
-	// objl::Loader loader;
-	// bool canLoad = loader.LoadFile(objPath);
 
-	if (!canLoad) {
-		logger << LOGGER_ERROR << "Cannot load obj '" << objPath << "'" << LOGGER_ENDL;
+	tinyobj::attrib_t attrib;
+	std::vector<tinyobj::shape_t> shapes;
+	std::vector<tinyobj::material_t> materials;
+	std::string warn;
+	std::string err;
+
+	bool canLoad = tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, objPath.c_str());
+
+	if (!err.empty() || !canLoad) {
+		logger << LOGGER_ERROR << "Cannot load obj '" << objPath << "' :" << err << LOGGER_ENDL;
 		return;
+	}
+
+	if (!warn.empty()) {
+		logger << LOGGER_WARN << "Warning from obj loader while loading obj '" << objPath << "' :" << warn << LOGGER_ENDL;
 	}
 
 	logger << LOGGER_INFO << "Loaded: " << objPath << LOGGER_ENDL;
 
-	// loadFromObj(loader.LoadedMeshes[0]);
+	loadFromObj(attrib);
 }
 
-Mesh::Mesh(objl::Mesh objMesh) {
+Mesh::Mesh(tinyobj::attrib_t attribArr) {
 	// loadFromObj(objMesh);
 }
 
-void Mesh::loadFromObj(objl::Mesh objMesh) {
+void Mesh::loadFromObj(tinyobj::attrib_t atrribArr) {
 	// OBJLtoGLM(objMesh.Vertices, vertices, normals, texCoords);
 	// indices = objMesh.Indices;
 	// name = objMesh.MeshName;
