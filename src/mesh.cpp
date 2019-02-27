@@ -7,13 +7,10 @@ Mesh::Mesh() {
 Mesh::Mesh(std::string objPath) {
 	Logger logger;
 
-	tinyobj::attrib_t attrib;
-	std::vector<tinyobj::shape_t> shapes;
-	std::vector<tinyobj::material_t> materials;
-	std::string warn;
-	std::string err;
+	ObjLMesh mesh;
+	std::string warn, err;
 
-	bool canLoad = tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, objPath.c_str());
+	bool canLoad = tinyobj::LoadObj(&mesh.attrib, &mesh.shapes, &mesh.materials, &warn, &err, objPath.c_str());
 
 	if (!err.empty() || !canLoad) {
 		logger << LOGGER_ERROR << "Cannot load obj '" << objPath << "' :" << err << LOGGER_ENDL;
@@ -26,14 +23,14 @@ Mesh::Mesh(std::string objPath) {
 
 	logger << LOGGER_INFO << "Loaded: " << objPath << LOGGER_ENDL;
 
-	loadFromObj(attrib);
+	loadFromObj(mesh);
 }
 
-Mesh::Mesh(tinyobj::attrib_t attribArr) {
+Mesh::Mesh(ObjLMesh mesh) {
 	// loadFromObj(objMesh);
 }
 
-void Mesh::loadFromObj(tinyobj::attrib_t atrribArr) {
+void Mesh::loadFromObj(ObjLMesh mesh) {
 	// OBJLtoGLM(objMesh.Vertices, vertices, normals, texCoords);
 	// indices = objMesh.Indices;
 	// name = objMesh.MeshName;

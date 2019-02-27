@@ -26,13 +26,22 @@ struct Vertex {
 	glm::vec2 texCoord;
 };
 
+
+// For easy passing around of the tinyobj
+// mesh structures
+struct ObjLMesh {
+    tinyobj::attrib_t attrib;
+    std::vector<tinyobj::shape_t> shapes;
+    std::vector<tinyobj::material_t> materials;
+};
+
 class Mesh {
 public:
     Mesh();
     Mesh(std::string objPath);
-	Mesh(tinyobj::attrib_t attribArr);
+	Mesh(ObjLMesh mesh);
 
-	void loadFromObj(tinyobj::attrib_t attribArr);
+	void loadFromObj(ObjLMesh mesh);
     void setup();
 
     void bind();
