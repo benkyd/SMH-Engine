@@ -31,9 +31,8 @@ Mesh::Mesh(ObjLMesh mesh) {
 }
 
 void Mesh::loadFromObj(ObjLMesh mesh) {
-	// OBJLtoGLM(objMesh.Vertices, vertices, normals, texCoords);
-	// indices = objMesh.Indices;
-	// name = objMesh.MeshName;
+	OBJLtoGLM(mesh, vertices, normals, texCoords);
+	OBJLtoIndices(mesh, indices);
 
 	//Logger logger;
 	//for (int i = 0; i < 100; i++) {

@@ -7,14 +7,21 @@
 
 #include <tiny_obj_loader.h>
 
-void OBJLtoGLM(std::vector<objl::Vertex>& inVertArr, 
+struct ObjLMesh {
+    tinyobj::attrib_t attrib;
+    std::vector<tinyobj::shape_t> shapes;
+    std::vector<tinyobj::material_t> materials;
+};
+
+void OBJLtoGLM(ObjLMesh& mesh, 
                std::vector<glm::vec3>& outVert,
                std::vector<glm::vec3>& outNorm,
-               std::vector<glm::vec3>& outTexCoord);
+               std::vector<glm::vec3>& outTexCoord,
+               std::vector<GLuint>& outIndices);
 
-void UintToGLuint(std::vector<unsigned int>& inIndices,
+void UintToGLuint(ObjLMesh& mesh,
                   std::vector<GLuint>& outIndices);
 
-void OBJLVec3toGLM(objl::Vector3& inVec, glm::vec3& outVec);
+// void OBJLVec3toGLM(objl::Vector3& inVec, glm::vec3& outVec);
 
 #endif
