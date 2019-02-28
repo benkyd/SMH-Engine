@@ -10,8 +10,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include <OBJLoader.h>
-
 #include <logger.h>
 #include "./util/util.h"
 
@@ -19,10 +17,10 @@ class Material {
 public:
 	Material();
 	Material(std::string objPath);
-	Material(objl::Mesh objMesh);
+	// Material(objl::Mesh objMesh);
 
-	void loadFromObj(objl::Mesh objMesh);
-	void loadFromMat(objl::Material mat);
+	// void loadFromObj(objl::Mesh objMesh);
+	// void loadFromMat(objl::Material mat);
 
 	// Material Name
 	std::string name;

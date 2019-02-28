@@ -13,12 +13,12 @@ Mesh::Mesh(std::string objPath) {
 	bool canLoad = tinyobj::LoadObj(&mesh.attrib, &mesh.shapes, &mesh.materials, &warn, &err, objPath.c_str());
 
 	if (!err.empty() || !canLoad) {
-		logger << LOGGER_ERROR << "Cannot load obj '" << objPath << "' :" << err << LOGGER_ENDL;
+		logger << LOGGER_ERROR << "Cannot load obj '" << objPath << "': " << err << LOGGER_ENDL;
 		return;
 	}
 
 	if (!warn.empty()) {
-		logger << LOGGER_WARN << "Warning from obj loader while loading obj '" << objPath << "' :" << warn << LOGGER_ENDL;
+		logger << LOGGER_WARN << "Warning from obj loader while loading obj '" << objPath << "': " << warn << LOGGER_ENDL;
 	}
 
 	logger << LOGGER_INFO << "Loaded: " << objPath << LOGGER_ENDL;
@@ -31,8 +31,8 @@ Mesh::Mesh(ObjLMesh mesh) {
 }
 
 void Mesh::loadFromObj(ObjLMesh mesh) {
-	OBJLtoGLM(mesh, vertices, normals, texCoords);
-	OBJLtoIndices(mesh, indices);
+	OBJLtoGLM(mesh, vertices, normals, texCoords, indices);
+	// OBJLtoIndices(mesh, indices);
 
 	//Logger logger;
 	//for (int i = 0; i < 100; i++) {
@@ -78,7 +78,7 @@ void Mesh::setup() {
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, 
 						 (const void*)((vertices.size() + texCoords.size()) * sizeof(glm::vec3)));
 
-	logger << LOGGER_INFO << "Mesh " << name << " setup" << LOGGER_ENDL;
+	logger << LOGGER_INFO << "Mesh setup" << LOGGER_ENDL;
 
 	glBindVertexArray(0);
 }

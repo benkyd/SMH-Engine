@@ -7,7 +7,6 @@
 // #include <glm/gtc/type_ptr.hpp>
 
 // Custom includes
-#define TINYOBJLOADER_IMPLEMENTATION
 #define LOGGER_DEFINITION
 #include <logger.h>
 

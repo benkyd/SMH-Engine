@@ -26,7 +26,6 @@ struct Vertex {
 	glm::vec2 texCoord;
 };
 
-
 // For easy passing around of the tinyobj
 // mesh structures
 struct ObjLMesh {
