@@ -83,6 +83,7 @@ Display::Display(std::string name, Logger& logger, int w, int h,
     // Load OpenGL
 	gladLoadGLLoader(SDL_GL_GetProcAddress);
 	glEnable(GL_MULTISAMPLE);
+    glEnable(GL_DEPTH_TEST);
     logger << LOGGER_INFO << "Loaded OpenGL" << LOGGER_ENDL;
     logger << LOGGER_ENDL;
     isClosed = false;
@@ -175,6 +176,7 @@ Display::Display(std::string name, Logger& logger, int w, int h,
     // Load OpenGL
 	gladLoadGLLoader(SDL_GL_GetProcAddress);
 	glEnable(GL_MULTISAMPLE);
+    glEnable(GL_DEPTH_TEST);
     logger << LOGGER_INFO << "Loaded OpenGL" << LOGGER_ENDL;
     logger << LOGGER_ENDL;
     isClosed = false;

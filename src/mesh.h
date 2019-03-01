@@ -56,6 +56,8 @@ public:
 	//one buffer :)
     std::vector<glm::vec3> texCoords;
     std::vector<unsigned int> indices;
+
+    float rotation = 0.0f;
 private:
     GLuint vertexBuffer;
     GLuint indexBuffer;

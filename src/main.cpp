@@ -29,14 +29,25 @@ int main (int argc, char** argv) {
 	Shader shader;
 	shader.load("./resources/shaders/phong").attatch().link().use();
 
-	Mesh mesh{ "./resources/dragon.obj" };
+	Mesh mesh{ "./resources/test1.obj" };
 	mesh.setup();
 
     SDL_Event e;
     while (!display.isClosed) {
-        while (SDL_PollEvent(&e))
+        while (SDL_PollEvent(&e)) {
             if (e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
 				display.isClosed = true;
+        }
+
+        const Uint8* state = SDL_GetKeyboardState(NULL);
+
+        if (state[SDL_SCANCODE_Q]) {
+            mesh.rotation += -1.5f;
+        }
+
+        if (state[SDL_SCANCODE_E]) {
+            mesh.rotation += 1.5f;
+        }
 
 		mesh.bind();
 		mesh.render(shader);
