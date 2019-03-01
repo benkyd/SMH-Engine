@@ -22,13 +22,12 @@ void OBJLtoGLM(ObjLMesh& mesh,
                 mesh.attrib.vertices[3 * index.vertex_index + 1],
                 mesh.attrib.vertices[3 * index.vertex_index + 2]
             };
-            outVert.push_back(vertex);
 
-            outNorm.push_back({
-                mesh.attrib.normals[3 * index.normal_index + 0],
-                mesh.attrib.normals[3 * index.normal_index + 1],
-                mesh.attrib.normals[3 * index.normal_index + 2]
-            });
+            // outNorm.push_back({
+            //     mesh.attrib.normals[3 * index.normal_index + 0],
+            //     mesh.attrib.normals[3 * index.normal_index + 1],
+            //     mesh.attrib.normals[3 * index.normal_index + 2]
+            // });
 
             // outTexCoord.push_back({
             //     mesh.attrib.texcoords[2 * index.texcoord_index + 0],
@@ -36,15 +35,16 @@ void OBJLtoGLM(ObjLMesh& mesh,
             //     0.0f
             // });
 
-            // if (uniqueVertices.count(vertex) == 0) {
-            //     uniqueVertices[vertex] = static_cast<uint32_t>(outVert.size());
-            // }
+            if (uniqueVertices.count(vertex) == 0) {
+                uniqueVertices[vertex] = static_cast<uint32_t>(outVert.size());
+                outVert.push_back(vertex);
+            }
 
-            outIndices.push_back(outIndices.size());
+            outIndices.push_back(uniqueVertices[vertex]);
         }
     }
 
-    // ComputeNormals(outNorm, outVert, outIndices);
+    ComputeNormals(outNorm, outVert, outIndices);
 }
 
 void ComputeNormals(std::vector<glm::vec3>& normals, 

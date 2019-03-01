@@ -29,7 +29,7 @@ int main (int argc, char** argv) {
 	Shader shader;
 	shader.load("./resources/shaders/phong").attatch().link().use();
 
-	Mesh mesh{ "./resources/test1.obj" };
+	Mesh mesh{ "./resources/lucy.obj" };
 	mesh.setup();
 
     SDL_Event e;

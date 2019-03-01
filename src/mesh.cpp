@@ -91,7 +91,7 @@ void Mesh::render(Shader& shader) {
 
 	// Model matrice
 	glm::mat4 model = glm::mat4(1.0f);
-	model = glm::translate(model, { -17.0f, -17.0f, -17.0f });
+	model = glm::translate(model, { -170.0f, -170.0f, -170.0f });
 	model = glm::rotate(model, glm::radians(-160.0f + this->rotation), glm::vec3(0.0f, 1.0f, 0.0f));
 	// Gets uniform for model matrice, to be used later
 	GLint uniTrans = glGetUniformLocation(shader.getProgram(), "model");
