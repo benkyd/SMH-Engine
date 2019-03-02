@@ -13,9 +13,10 @@
 #include <tiny_obj_loader.h>
 
 #include <logger.h>
-#include "camera.h"
 #include "shader.h"
 #include "./util/util.h"
+
+class Camera;
 
 // Not in use yet
 // Will be used as a vector, enabling

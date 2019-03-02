@@ -1,7 +1,11 @@
 #ifndef SMHENGINE_SRC_CAMERA_H_
 #define SMHENGINE_SRC_CAMERA_H_
 
+#if _WIN32
+#include <SDL.h>
+#else
 #include <SDL2/SDL.h>
+#endif
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>

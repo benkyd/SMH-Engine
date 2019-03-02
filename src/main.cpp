@@ -11,6 +11,7 @@
 #include <logger.h>
 
 #include "display.h"
+#include "camera.h"
 #include "shader.h"
 #include "model.h"
 
@@ -38,12 +39,15 @@ int main (int argc, char** argv) {
 
     SDL_Event e;
     while (!display.isClosed) {
-
         camera.moveCamera();
+
         while (SDL_PollEvent(&e)) {
-            camera.handleMouse(e);
-            if (e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
+            if (e.type == SDL_QUIT)
 				display.isClosed = true;
+			if (e.key.keysym.sym == SDLK_t) {
+				SDL_SetRelativeMouseMode(SDL_GetRelativeMouseMode() == SDL_TRUE ? SDL_FALSE : SDL_TRUE);
+			}
+            camera.handleMouse(e);
         }
 
         const Uint8* state = SDL_GetKeyboardState(NULL);
@@ -57,11 +61,12 @@ int main (int argc, char** argv) {
         }
 
 		mesh.bind();
-		mesh.render(shader, camera);`
+		mesh.render(shader, camera);
 		mesh.unbind();
 
 		display.update();
-    }
+	}
+
 
     return 0;
 }

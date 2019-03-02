@@ -68,7 +68,7 @@ void Camera::moveCamera() {
     glm::mat4 mat = getViewMatrix();
     //row major
     glm::vec3 forward(mat[0][2], mat[1][2], mat[2][2]);
-    glm::vec3 strafe( mat[0][0], mat[1][0], mat[2][0]);
+    glm::vec3 strafe (mat[0][0], mat[1][0], mat[2][0]);
         
     //forward vector must be negative to look forward. 
     //read :http://in2gpu.com/2015/05/17/view-matrix/
