@@ -5,10 +5,10 @@ in vec3 FragPos;
 // in vec4 FragPosLightSpace;
 
 uniform vec3 lightPos;
+uniform vec3 viewPos;
 
 out vec4 outColour;
 
-vec3 viewPos = vec3(0.0, 0.0, 0.0);
 vec3 objectColour = vec3(1.0, 1.0, 1.0);
 vec3 lightColour = vec3(0.7, 0.3, 0.65);
 // vec3 lightColour = vec3(0.3, 0.85, 1.0);

@@ -13,6 +13,7 @@
 #include <tiny_obj_loader.h>
 
 #include <logger.h>
+#include "camera.h"
 #include "shader.h"
 #include "./util/util.h"
 
@@ -44,7 +45,7 @@ public:
     void setup();
 
     void bind();
-    void render(Shader& shader);
+    void render(Shader& shader, Camera& camera);
     static void unbind();
 
     GLuint VAOid;

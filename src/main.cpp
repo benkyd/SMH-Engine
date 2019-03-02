@@ -26,6 +26,10 @@ int main (int argc, char** argv) {
 
     Display display{"SMH Engine", logger, 1280, 720, MXAA_16X, VSYNC_ENABLED};
 
+    Camera camera;
+    camera.mouseSensitivity = 0.0012f;
+    camera.cameraSpeed = 1.0f;
+
 	Shader shader;
 	shader.load("./resources/shaders/phong").attatch().link().use();
 
@@ -34,7 +38,10 @@ int main (int argc, char** argv) {
 
     SDL_Event e;
     while (!display.isClosed) {
+
+        camera.moveCamera();
         while (SDL_PollEvent(&e)) {
+            camera.handleMouse(e);
             if (e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
 				display.isClosed = true;
         }
@@ -50,7 +57,7 @@ int main (int argc, char** argv) {
         }
 
 		mesh.bind();
-		mesh.render(shader);
+		mesh.render(shader, camera);`
 		mesh.unbind();
 
 		display.update();

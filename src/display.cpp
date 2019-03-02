@@ -68,6 +68,9 @@ Display::Display(std::string name, Logger& logger, int w, int h,
     logger << LOGGER_INFO << "Creating OpenGL context" << LOGGER_ENDL;
 	glContext = SDL_GL_CreateContext(window);
 
+	SDL_WarpMouseInWindow(window, w / 2, h / 2);
+	SDL_SetRelativeMouseMode(SDL_TRUE);
+
     // Set VSYNC swap interval
     if (vsyncMode == VSYNC_DEFAULT || vsyncMode == VSYNC_ENABLED) {
         SDL_GL_SetSwapInterval(1);
@@ -84,6 +87,8 @@ Display::Display(std::string name, Logger& logger, int w, int h,
 	gladLoadGLLoader(SDL_GL_GetProcAddress);
 	glEnable(GL_MULTISAMPLE);
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
     logger << LOGGER_INFO << "Loaded OpenGL" << LOGGER_ENDL;
     logger << LOGGER_ENDL;
     isClosed = false;
@@ -161,6 +166,9 @@ Display::Display(std::string name, Logger& logger, int w, int h,
     logger << LOGGER_INFO << "Creating OpenGL context" << LOGGER_ENDL;
 	glContext = SDL_GL_CreateContext(window);
 
+	SDL_WarpMouseInWindow(window, w / 2, h / 2);
+	SDL_SetRelativeMouseMode(SDL_TRUE);
+
     // Set VSYNC swap interval
     if (vsyncMode == VSYNC_DEFAULT || vsyncMode == VSYNC_ENABLED) {
         SDL_GL_SetSwapInterval(1);
@@ -177,6 +185,8 @@ Display::Display(std::string name, Logger& logger, int w, int h,
 	gladLoadGLLoader(SDL_GL_GetProcAddress);
 	glEnable(GL_MULTISAMPLE);
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
     logger << LOGGER_INFO << "Loaded OpenGL" << LOGGER_ENDL;
     logger << LOGGER_ENDL;
     isClosed = false;

@@ -87,26 +87,25 @@ void Mesh::bind() {
 	glBindVertexArray(VAOid);
 }
 
-void Mesh::render(Shader& shader) {
+void Mesh::render(Shader& shader, Camera& camera) {
 
 	// Model matrice
 	glm::mat4 model = glm::mat4(1.0f);
 	model = glm::translate(model, { -170.0f, -170.0f, -170.0f });
 	model = glm::rotate(model, glm::radians(-160.0f + this->rotation), glm::vec3(0.0f, 1.0f, 0.0f));
-	// Gets uniform for model matrice, to be used later
 	GLint uniTrans = glGetUniformLocation(shader.getProgram(), "model");
 	glUniformMatrix4fv(uniTrans, 1, GL_FALSE, glm::value_ptr(model));
 
 
-	// View matrice
-	glm::mat4 view = glm::lookAt(
-		glm::vec3(1.0f, 1.0f, 1.0f),
-		glm::vec3(0.0f, 0.4f, 0.0f),
-		glm::vec3(0.0f, 1.0f, 0.0f)
-	);
+	// // View matrice
+	// glm::mat4 view = glm::lookAt(
+	// 	glm::vec3(1.0f, 1.0f, 1.0f),
+	// 	glm::vec3(0.0f, 0.4f, 0.0f),
+	// 	glm::vec3(0.0f, 1.0f, 0.0f)
+	// );
 	// Get uniform and send it to the GPU
 	GLint uniView = glGetUniformLocation(shader.getProgram(), "view");
-	glUniformMatrix4fv(uniView, 1, GL_FALSE, glm::value_ptr(view));
+	glUniformMatrix4fv(uniView, 1, GL_FALSE, glm::value_ptr(camera.getViewMatrix()));
 
 	// Projection matrice
 	glm::mat4 proj = glm::perspective(glm::radians(45.0f), 1280.0f / 720.0f, 1.0f, 1000.0f);//camera.perspective;
@@ -115,10 +114,13 @@ void Mesh::render(Shader& shader) {
 	glUniformMatrix4fv(uniProj, 1, GL_FALSE, glm::value_ptr(proj));
 
 
-	glm::vec3 lightPos = { -2.0f, 4.0f, -1.0f };
+	glm::vec3 lightPos = { -270.0f, -270.0f, -1.0f };
 
-	GLint uniLight = glGetUniformLocation(shader.getProgram(), "lightpos");
+	GLint uniLight = glGetUniformLocation(shader.getProgram(), "lightPos");
 	glUniformMatrix3fv(uniLight, 1, GL_FALSE, glm::value_ptr(lightPos));
+
+	GLint uniCamPos = glGetUniformLocation(shader.getProgram(), "viewPos");
+	glUniformMatrix3fv(uniLight, 1, GL_FALSE, glm::value_ptr(camera.getPos()));
 
 	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 }
