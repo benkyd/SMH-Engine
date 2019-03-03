@@ -5,7 +5,7 @@
 // #include <glm/glm.hpp>
 // #include <glm/gtc/matrix_transform.hpp>
 // #include <glm/gtc/type_ptr.hpp>
-
+	
 // Custom includes
 #define LOGGER_DEFINITION
 #include <logger.h>
@@ -44,9 +44,9 @@ int main (int argc, char** argv) {
         while (SDL_PollEvent(&e)) {
             if (e.type == SDL_QUIT)
 				display.isClosed = true;
-			if (e.key.keysym.sym == SDLK_t) {
-				SDL_SetRelativeMouseMode(SDL_GetRelativeMouseMode() == SDL_TRUE ? SDL_FALSE : SDL_TRUE);
-			}
+			//if (e.key.keysym.sym == SDLK_t) {
+			//	SDL_SetRelativeMouseMode(SDL_GetRelativeMouseMode() == SDL_TRUE ? SDL_FALSE : SDL_TRUE);
+			//}
             camera.handleMouse(e);
         }
 
