@@ -1,8 +1,8 @@
-#version 330
+#version 330 core
 
 in vec3 Normal;
 in vec3 FragPos;
-// in vec4 FragPosLightSpace;
+in vec4 FragPosLightSpace;
 
 uniform vec3 lightPos;
 uniform vec3 viewPos;

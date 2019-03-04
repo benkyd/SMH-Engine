@@ -97,7 +97,6 @@ void Mesh::render(Shader& shader, Camera& camera) {
 	GLint uniTrans = glGetUniformLocation(shader.getProgram(), "model");
 	glUniformMatrix4fv(uniTrans, 1, GL_FALSE, glm::value_ptr(model));
 
-
 	// // View matrice
 	// glm::mat4 view = glm::lookAt(
 	// 	glm::vec3(1.0f, 1.0f, 1.0f),
@@ -109,7 +108,7 @@ void Mesh::render(Shader& shader, Camera& camera) {
 	glUniformMatrix4fv(uniView, 1, GL_FALSE, glm::value_ptr(camera.getViewMatrix()));
 
 	// Projection matrice
-	glm::mat4 proj = glm::perspective(glm::radians(45.0f), 1280.0f / 720.0f, 1.0f, 1000.0f);//camera.perspective;
+	glm::mat4 proj = glm::perspective(glm::radians(45.0f), 1280.0f / 720.0f, 1.0f, 1000.0f);
 	// Get uniform and send it to the GPU
 	GLint uniProj = glGetUniformLocation(shader.getProgram(), "proj");
 	glUniformMatrix4fv(uniProj, 1, GL_FALSE, glm::value_ptr(proj));
