@@ -68,8 +68,8 @@ Display::Display(std::string name, Logger& logger, int w, int h,
     logger << LOGGER_INFO << "Creating OpenGL context" << LOGGER_ENDL;
 	glContext = SDL_GL_CreateContext(window);
 
-	SDL_WarpMouseInWindow(window, w / 2, h / 2);
-	SDL_SetRelativeMouseMode(SDL_TRUE);
+	// SDL_WarpMouseInWindow(window, w / 2, h / 2);
+	// SDL_SetRelativeMouseMode(SDL_TRUE);
 
     // Set VSYNC swap interval
     if (vsyncMode == VSYNC_DEFAULT || vsyncMode == VSYNC_ENABLED) {
@@ -166,8 +166,8 @@ Display::Display(std::string name, Logger& logger, int w, int h,
     logger << LOGGER_INFO << "Creating OpenGL context" << LOGGER_ENDL;
 	glContext = SDL_GL_CreateContext(window);
 
-	SDL_WarpMouseInWindow(window, w / 2, h / 2);
-	SDL_SetRelativeMouseMode(SDL_TRUE);
+	// SDL_WarpMouseInWindow(window, w / 2, h / 2);
+	// SDL_SetRelativeMouseMode(SDL_TRUE);
 
     // Set VSYNC swap interval
     if (vsyncMode == VSYNC_DEFAULT || vsyncMode == VSYNC_ENABLED) {

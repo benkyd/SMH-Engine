@@ -33,7 +33,7 @@ Mesh::Mesh(ObjLMesh mesh) {
 
 void Mesh::loadFromObj(ObjLMesh mesh) {
 	OBJLtoGLM(mesh, vertices, normals, texCoords, indices);
-	// OBJLtoIndices(mesh, indices);
+	// OBJLtoIndices(mesh, indices);E
 
 	//Logger logger;
 	//for (int i = 0; i < 100; i++) {
