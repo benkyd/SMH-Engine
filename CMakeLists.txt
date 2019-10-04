@@ -40,9 +40,9 @@ if (UNIX)
 endif (UNIX)
 
 include_directories(${executable}
-    #${PNG_INCLUDE_DIR}
-    #${JPEG_INCLUDE_DIR}
-    ${IncludeDIR}
+	#${PNG_INCLUDE_DIR}
+	#${JPEG_INCLUDE_DIR}
+	${IncludeDIR}
 )
 
 file(GLOB SourceFiles 
@@ -53,8 +53,8 @@ file(GLOB SourceFiles
 add_executable(${executable} ${SourceFiles})
 
 set_target_properties(${executable} PROPERTIES
-    CXX_STANDARD 17
-    CXX_EXTENSIONS OFF
+	CXX_STANDARD 17
+	CXX_EXTENSIONS OFF
 )
 
 if (UNIX)
@@ -63,7 +63,7 @@ if (UNIX)
 		#SDL2_image
 		#PNG::PNG
 		#JPEG::JPEG
-	    OpenGL::OpenGL
+		OpenGL::OpenGL
 		OpenGL::GL
 		Threads::Threads
 	)
@@ -80,5 +80,5 @@ if (WIN32)
 endif (WIN32)
 
 target_link_libraries(${executable}
-    ${CMAKE_DL_LIBS}
+	${CMAKE_DL_LIBS}
 )
